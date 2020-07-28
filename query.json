@@ -1,0 +1,17 @@
+{
+  "queryType": "scan",
+  "dataSource": {
+    "type": "table",
+    "name": "wikipedia"
+  },
+  "intervals": {
+    "type": "intervals",
+    "intervals": [
+      "-146136543-09-08T08:23:32.096Z/146140482-04-24T15:36:27.903Z"
+    ]
+  },
+  "columns": [
+    "__time"
+  ],
+  "limit": 3
+}

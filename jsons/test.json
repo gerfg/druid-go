@@ -1,0 +1,68 @@
+
+EXPLAIN PLAN FOR
+SELECT
+ "page",
+ "countryName",
+ COUNT(*) AS "Edits"
+FROM "wikipedia"
+WHERE "countryName" IS NOT NULL
+GROUP BY 1, 2
+ORDER BY "Edits" DESC
+
+{
+    "queryType": "groupBy",
+    "dataSource": {
+        "type": "table",
+        "name": "wikipedia"
+    },
+    "intervals": {
+        "type": "intervals",
+        "intervals": ["-146136543-09-08T08:23:32.096Z/146140482-04-24T15:36:27.903Z"]
+    },
+    "virtualColumns": [],
+    "filter": {
+        "type": "not",
+        "field": {
+            "type": "selector",
+            "dimension": "countryName",
+            "value": null,
+            "extractionFn": null
+        }
+    },
+    "granularity": {
+        "type": "all"
+    },
+    "dimensions": [{
+        "type": "default",
+        "dimension": "page",
+        "outputName": "d0",
+        "outputType": "STRING"
+    }, {
+        "type": "default",
+        "dimension": "countryName",
+        "outputName": "d1",
+        "outputType": "STRING"
+    }],
+    "aggregations": [{
+        "type": "count",
+        "name": "a0"
+    }],
+    "postAggregations": [],
+    "having": null,
+    "limitSpec": {
+        "type": "default",
+        "columns": [{
+            "dimension": "a0",
+            "direction": "descending",
+            "dimensionOrder": {
+                "type": "numeric"
+            }
+        }],
+        "limit": 100
+    },
+    "context": {
+        "sqlOuterLimit": 100,
+        "sqlQueryId": "138f174c-9c97-47b7-a9c3-6fc77c8490a0"
+    },
+    "descending": false
+}

@@ -1,0 +1,149 @@
+{
+    "queryType": "scan",
+    "dataSource": {
+      "type": "table",
+      "name": "wikipedia"
+    },
+    "intervals": {
+      "type": "intervals",
+      "intervals": [
+        "-146136543-09-08T08:23:32.096Z/146140482-04-24T15:36:27.903Z"
+      ]
+    },
+    "virtualColumns": [
+      {
+        "type": "expression",
+        "name": "v0",
+        "expression": "'Brazil'",
+        "outputType": "STRING"
+      }
+    ],
+    "resultFormat": "compactedList",
+    "batchSize": 20480,
+    "limit": 100,
+    "order": "none",
+    "filter": {
+      "type": "selector",
+      "dimension": "countryName",
+      "value": "Brazil",
+      "extractionFn": null
+    },
+    "columns": [
+      "__time",
+      "channel",
+      "cityName",
+      "comment",
+      "count",
+      "countryIsoCode",
+      "isAnonymous",
+      "isMinor",
+      "isNew",
+      "isRobot",
+      "isUnpatrolled",
+      "metroCode",
+      "namespace",
+      "page",
+      "regionIsoCode",
+      "regionName",
+      "sum_added",
+      "sum_deleted",
+      "sum_delta",
+      "user",
+      "v0"
+    ],
+    "legacy": false,
+    "context": {
+      "sqlOuterLimit": 100,
+      "sqlQueryId": "88b430b9-53b7-4b28-ac4a-a7e32a842f5e"
+    },
+    "descending": false,
+    "granularity": {
+      "type": "all"
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  {
+    "queryType": "scan",
+    "dataSource": {
+      "type": "table",
+      "name": "wikipedia"
+    },
+    "intervals": {
+      "type": "intervals",
+      "intervals": [
+        "-146136543-09-08T08:23:32.096Z/146140482-04-24T15:36:27.903Z"
+      ]
+    },
+    "virtualColumns": [
+      {
+        "type": "expression",
+        "name": "v0",
+        "expression": "'Brazil'",
+        "outputType": "STRING"
+      }
+    ],
+    "resultFormat": "compactedList",
+    "batchSize": 20480,
+    "limit": 100,
+    "order": "none",
+    "filter": {
+      "type": "and",
+      "fields": [
+        {
+          "type": "selector",
+          "dimension": "countryName",
+          "value": "Brazil",
+          "extractionFn": null
+        },
+        {
+          "type": "expression",
+          "expression": "\"isAnonymous\""
+        }
+      ]
+    },
+    "columns": [
+      "__time",
+      "channel",
+      "cityName",
+      "comment",
+      "count",
+      "countryIsoCode",
+      "isAnonymous",
+      "isMinor",
+      "isNew",
+      "isRobot",
+      "isUnpatrolled",
+      "metroCode",
+      "namespace",
+      "page",
+      "regionIsoCode",
+      "regionName",
+      "sum_added",
+      "sum_deleted",
+      "sum_delta",
+      "user",
+      "v0"
+    ],
+    "legacy": false,
+    "context": {
+      "sqlOuterLimit": 100,
+      "sqlQueryId": "55106119-546c-4685-9f16-cea07fb6899f"
+    },
+    "descending": false,
+    "granularity": {
+      "type": "all"
+    }
+  }
