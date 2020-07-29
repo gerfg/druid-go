@@ -8,7 +8,9 @@ import (
 )
 
 func DruidQuery(w http.ResponseWriter, r *http.Request) {
-
+	if r.Method != http.MethodPost {
+		return
+	}
 	reqJSON, err := utils.ExtractRequestBody(r)
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
