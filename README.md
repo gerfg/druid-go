@@ -2,9 +2,11 @@
 
 # Native Queries
 
+
+
 ## Scan
 
-Return uma lista de linhas (raw).
+Retorna uma lista de linhas (raw).
 
     Além do uso simples onde uma consulta Scan é emitida para o Broker, a consulta Scan também pode ser emitida diretamente para processos históricos ou tarefas de ingestão de streaming. Isso pode ser útil se você quiser recuperar grandes quantidades de dados em paralelo.
 
@@ -70,7 +72,7 @@ Este tipo de query utiliza de um "timeseries query object" e retorna um array de
 |------------|-----------|-----------------|
 |queryType |	Este campo precisa ser sempre "timeseries" (primeiro parâmetro que o druid verifica para processar a query) | sim |
 |dataSource | fonte dos dados (string ou objeto), bastante similar  uma tabela | sim |
-|intervals | Objeto JSON representando intervalos no formato ISO-8601. Time range que delimita a query (baseando-se no __time) | sim| 
+|intervals | Objeto JSON representando intervalos no formato ISO-8601. Time range que delimita a query (baseando-se no __time) | sim|
 |descending | se deve ordenar o resultado de forma descendente, default: false -> ascendente | não |
 | granularity | define a granularidade do "bucket query results", [granularity](https://druid.apache.org/docs/latest/querying/granularities.html) | sim|
 

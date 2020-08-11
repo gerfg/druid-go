@@ -1,29 +1,19 @@
 package druid
 
-import (
-	"bytes"
-	"net/http"
+import "time"
 
-	"github.com/gerfg/go-druid/utils"
-)
+type DruidNativeQuery interface {
+	ToString() (string, error)
+}
 
-func Query(reqJSON *[]byte) (*[]byte, error) {
-	req, err := http.NewRequest("POST", "http://localhost:8888/druid/v2/", bytes.NewBuffer(*reqJSON))
-	if err != nil {
-		return nil, err
+type Interval struct {
+	begin time.Time
+	end   time.Time
+}
+
+func NewInterval(begin time.Time, end time.Time) Interval {
+	return Interval{
+		begin: begin,
+		end:   end,
 	}
-	req.Header.Set("Content-Type", "application/json")
-
-	resp, err := http.DefaultClient.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	respBody, err := utils.ExtractResponse(resp)
-	if err != nil {
-		return nil, err
-	}
-
-	return respBody, nil
 }
