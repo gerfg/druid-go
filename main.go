@@ -1,48 +1,58 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
-	"log"
 	"time"
 
 	"github.com/gerfg/go-druid/druid"
 	"github.com/gerfg/go-druid/druid/filters"
+	"github.com/gerfg/go-druid/druid/filters/types"
 )
 
 func main() {
 	begin, _ := time.Parse("2006-01-02T15:04:05-0700", "-146136543-09-08T08:23:32.096Z")
 	end, _ := time.Parse("2006-01-02T15:04:05-0700", "146140482-04-24T15:36:27.903Z")
-	intervals := make([]druid.Interval, 0)
+	intervals := make([]druid.TimeWindow, 0)
 	for i := 0; i < 3; i++ {
-		intervals = append(intervals, druid.NewInterval(begin, end))
+		intervals = append(intervals, druid.NewTimeWindow(begin, end))
 	}
 
-	resultFormat := "list"
+	// resultFormat := "list"
 	var limit int64 = 50
-	var columns []string = []string{"channel", "cityName"}
+	// var columns []string = []string{"channel", "cityName"}
 
-	agg := filters.NewFilterAggregator(make([]filters.DruidSingleFilter, 2))
-	agg.Fields[0] = &filters.SelectorFilter{Dimension: "dim1", Value: "val1"}
-	agg.Fields[1] = &filters.SelectorFilter{Dimension: "dim2", Value: "val2"}
+	agg := types.NewAggregatorFilter(make([]filters.DruidSingleFilter, 4))
+	agg.Fields[0] = types.NewselectorFilter("dimension", "val1")
+	agg.Fields[1] = types.NewselectorFilter("dimension", "val2")
+	agg.Fields[2] = types.NewInFilter("dimension", []string{"val1", "val2", "val3"})
+	agg.Fields[3] = types.NewLikeFilter("dimension", "D%")
 
-	test := druid.NewScanQuery(
+	testScan := druid.NewScanQuery(
 		"table",
 		"wikipedia",
 		intervals,
-		resultFormat,
-		columns,
 		limit,
+		nil,
+		nil,
 		agg,
 	)
 
-	if err := test.CreateNativeQuery(); err != nil {
-		log.Println(err)
+	byteArray, err := json.Marshal(testScan)
+	if err != nil {
+		panic(err)
 	}
 
-	fmt.Println(test.JSON() + "\n\n")
+	fmt.Println(string(byteArray))
 
-	json := []byte(test.JSON())
-	resp, _ := druid.Query(&json)
+	// if err := test.CreateNativeQuery(); err != nil {
+	// 	log.Println(err)
+	// }
 
-	fmt.Println(string(*resp))
+	// fmt.Println(test.JSON() + "\n\n")
+
+	// json := []byte(test.JSON())
+	// resp, _ := druid.Query(&json)
+
+	// fmt.Println(string(*resp))
 }
