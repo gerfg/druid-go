@@ -22,11 +22,12 @@ func main() {
 	var limit int64 = 50
 	// var columns []string = []string{"channel", "cityName"}
 
-	agg := types.NewAggregatorFilter(make([]filters.DruidSingleFilter, 4))
+	agg := types.NewAggregatorFilter(make([]filters.DruidSingleFilter, 5))
 	agg.Fields[0] = types.NewselectorFilter("dimension", "val1")
 	agg.Fields[1] = types.NewselectorFilter("dimension", "val2")
 	agg.Fields[2] = types.NewInFilter("dimension", []string{"val1", "val2", "val3"})
 	agg.Fields[3] = types.NewLikeFilter("dimension", "D%")
+	agg.Fields[4] = types.NewBoundFilter("dimension")
 
 	testScan := druid.NewScanQuery(
 		"table",
